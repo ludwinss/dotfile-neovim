@@ -122,109 +122,111 @@ return {
         },
         lualine_b = {},
         lualine_c = {
-          {
-            function() return '' end,  -- Empty component to avoid nil value
-            color = get_recording_color,
-            padding = 0,
-            separator = "",
-          },
-          {
-            "branch",
-            color = text_hl,
-            icon = { " ", color = icon_hl },
-            separator = "",
-            padding = 0,
-          },
-          {
-            function() return '' end,  -- Empty component to avoid nil value
-            padding = { left = 1 },
-            color = text_hl,
-            separator = "",
-          },
-          {
-            "diff",
-            color = text_hl,
-            icon = { "  ", color = text_hl },
-            source = diff_source,
-            symbols = {
-              added = " ",
-              modified = " ",
-              removed = " ",
+            {
+                U.get_recording_icon,
+                color = get_recording_color,
+                padding = 0,
+                separator = "",
             },
-            diff_color = {
-              added = icon_hl,
-              modified = icon_hl,
-              removed = icon_hl,
+            {
+                "branch",
+                color = text_hl,
+                icon = { " ", color = icon_hl },
+                separator = "",
+                padding = 0,
             },
-            padding = 0,
-          },
+            {
+                U.get_git_compare,
+                padding = { left = 1 },
+                color = text_hl,
+                separator = "",
+            },
+            {
+                "diff",
+                color = text_hl,
+                icon = { "  ", color = text_hl },
+                source = diff_source,
+                symbols = {
+                    added = " ",
+                    modified = " ",
+                    removed = " ",
+                },
+                diff_color = {
+                    added = icon_hl,
+                    modified = icon_hl,
+                    removed = icon_hl,
+                },
+                padding = 0,
+            },
         },
         lualine_x = {
-          {
-            "diagnostics",
-            sources = { "nvim_diagnostic" },
-            symbols = {
-              error = " ",
-              warn = " ",
-              info = " ",
-              hint = "󱤅 ",
-              other = "󰠠 ",
-            },
-            colored = true,
-            padding = 2,
-          },
-          {
-            function() return '' end,  -- Empty component to avoid nil value
-            padding = 1,
-            color = text_hl,
-            icon = { " ", color = icon_hl },
-          },
-          {
-            "copilot",
-            padding = 1,
-            color = icon_hl,
-            show_colors = true,
-            symbols = {
-              status = {
-                icons = {
-                  enabled = " ",
-                  disabled = " ",
-                  warning = " ",
-                  unknown = " ",
+            {
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+                symbols = {
+                    error = " ",
+                    warn = " ",
+                    info = " ",
+                    hint = "󱤅 ",
+                    other = "󰠠 ",
                 },
-                hl = {
-                  enabled = green,
-                  disabled = icon_hl.fg,
-                  warning = yellow,
-                  unknown = icon_hl.fg,
-                },
-              },
-              spinners = { " " },
-              spinner_color = green,
+                colored = true,
+                padding = 2,
             },
-          },
+            {
+                U.current_buffer_lsp,
+                padding = 1,
+                color = text_hl,
+                icon = { " ", color = icon_hl },
+            },
+            {
+                "copilot",
+                padding = 1,
+                color = icon_hl,
+                show_colors = true,
+                symbols = {
+                    status = {
+                        icons = {
+                            enabled = " ",
+                            disabled = " ",
+                            warning = " ",
+                            unknown = " ",
+                        },
+                        hl = {
+                            enabled = green,
+                            disabled = icon_hl.fg,
+                            warning = yellow,
+                            unknown = icon_hl.fg,
+                        },
+                    },
+                    spinners = { " " },
+                    spinner_color = green,
+                },
+            },
         },
         lualine_y = {},
         lualine_z = {
-          {
-            "location",
-            icon = { "", align = "left" },
-          },
-          {
-            "progress",
-            icon = { "", align = "left" },
-            separator = { right = "", left = "" },
-          },
+            {
+                "location",
+                icon = { "", align = "left" },
+            },
+            {
+                "progress",
+                icon = { "", align = "left" },
+                separator = { right = "", left = "" },
+            },
         },
-      },
-      options = {
-        disabled_filetypes = { "dashboard" },
-        globalstatus = true,
-        section_separators = { left = " ", right = " " },
-        component_separators = { left = "", right = "" },
-      },
-      extensions = {
-      },
+       },
+       options = {
+           disabled_filetypes = { "dashboard" },
+           globalstatus = true,
+           section_separators = { left = " ", right = " " },
+           component_separators = { left = "", right = "" },
+       },
+       extensions = {
+           telescope,
+           ["nvim-tree"] = tree,
+       },
     })
   end
 }
