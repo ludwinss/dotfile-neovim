@@ -10,7 +10,8 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities({
+      })
       local handlers = {
         function(server_name)
           require("lspconfig")[server_name].setup {
@@ -31,6 +32,21 @@ return {
       require('mason-lspconfig').setup({
         automatic_installation = true,
         handlers = handlers,
+        ensure_installed = {
+          "clangd",
+          "cssls",
+          "bashls",
+          "dockerls",
+          "tsserver",
+          "lua_ls",
+          "jsonls",
+          "html",
+          "remark_ls",
+          "rust-analyzer",
+          "taplo",
+          "yamlls",
+          "eslint"
+        },
       })
     end,
   },
