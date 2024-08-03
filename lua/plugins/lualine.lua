@@ -2,28 +2,114 @@ return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    local C = require("nordic.colors")
-    local text_hl = { fg = C.gray3 }
-    local icon_hl = { fg = C.gray4 }
-    local green = C.green.base
-    local yellow = C.yellow.base
-    local red = C.red.base
-
-    local fmt_mode = function(mode)
-      -- Define your fmt_mode function here
-      return mode
+    local U = require("utils")
+    
+    -------- Define colors theme installed in Nvim -----------------
+    local text_hl
+    local icon_hl
+    local green
+    local yellow
+    local red
+    
+    local C
+    
+    if vim.g.colors_name == "nordic" then
+      C = require("nordic.colors")
+    elseif vim.g.colors_name == "tokyonight-night" then
+      C = require("tokyonight.colors.moon")
     end
 
-    local get_recording_color = function()
-      -- Define your get_recording_color function here
-      return { fg = C.blue }
+    if C then
+      if vim.g.colors_name == "nordic" then
+        text_hl = { fg = C.gray3 }
+        icon_hl = { fg = C.gray4 }
+        green = C.green.base
+        yellow = C.yellow.base
+        red = C.red.base
+      elseif vim.g.colors_name == "tokyonight-night" then
+        text_hl = { fg = C.fg_gutter }
+        icon_hl = { fg = C.dark3 }
+        green = C.green1
+        yellow = C.yellow
+        red = C.red1
+      end
+    else
+      print("Error: Theme not supported")
+    end
+    --------------------------------------------------------------------
+
+    ---------- Renamed commands --------------------------------------
+    local function fmt_mode(s)
+       local mode_map = {
+           ["COMMAND"] = "COMMND",
+           ["V-BLOCK"] = "VBLOCK",
+           ["TERMINAL"] = "TERMNL",
+           ["V-REPLACE"] = "VREPLC",
+           ["O-PENDING"] = "0PNDNG",
+       }
+       return mode_map[s] or s
+    end
+    --------------------------------------------------------------------
+
+    local function get_recording_color()
+        if U.is_recording() then
+            return { fg = red }
+        else
+            return { fg = text_hl }
+        end
     end
 
-    local diff_source = function()
-      -- Define your diff_source function here
-      return { added = 0, modified = 0, removed = 0 }
+    local function diff_source()
+        local gitsigns = vim.b.gitsigns_status_dict
+        if gitsigns then
+            return {
+                added = gitsigns.added,
+                modified = gitsigns.changed,
+                removed = gitsigns.removed,
+            }
+        end
     end
-
+    
+    local function get_short_cwd() return vim.fn.fnamemodify(vim.fn.getcwd(), ":~") end
+    
+    local tree = {
+        sections = {
+            lualine_a = {
+                {
+                    "mode",
+                    fmt = fmt_mode,
+                    icon = { "" },
+                    separator = { right = " ", left = "" },
+                },
+            },
+            lualine_b = {},
+            lualine_c = {
+                {
+                    get_short_cwd,
+                    padding = 0,
+                    icon = { "   ", color = icon_hl },
+                    color = text_hl,
+                },
+            },
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {
+                {
+                    "location",
+                    icon = { "", align = "left" },
+                },
+                {
+                    "progress",
+                    icon = { "", align = "left" },
+                    separator = { right = "", left = "" },
+                },
+            },
+        },
+        filetypes = { "NvimTree" },
+    }
+    
+    local function telescope_text() return "Telescope" end
+    
     require('lualine').setup({
       sections = {
         lualine_a = {
@@ -138,7 +224,6 @@ return {
         component_separators = { left = "", right = "" },
       },
       extensions = {
-        ["nvim-tree"] = "tree",
       },
     })
   end
