@@ -42,7 +42,6 @@ return {
           "jsonls",
           "html",
           "remark_ls",
-          "rust-analyzer",
           "taplo",
           "yamlls",
           "eslint"
