@@ -14,6 +14,7 @@ vim.keymap.set('n', '<C-A-h>', ':tabprevious <CR>')
 vim.keymap.set('n', '<C-A-l>', ':tabnext <CR>')
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set('n', '<leader>z', ':ZenMode<CR>')
 vim.wo.number = true
 
 
