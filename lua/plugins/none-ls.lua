@@ -5,27 +5,14 @@ return {
 
     null_ls.setup({
       sources = {
-        -- Formatters
-        null_ls.builtins.formatting.csharpier.with({
-          filetypes = { "cs" }, -- Solo para archivos .cs
-        }),
-        null_ls.builtins.formatting.prettier.with({
-          filetypes = { "javascript", "typescript", "css", "html", "json", "markdown" },
-        }),
-        null_ls.builtins.formatting.stylua, -- Lua
-        null_ls.builtins.formatting.clang_format.with({
-          filetypes = { "c", "cpp", "objc", "objcpp" },
-        }),
-
-        null_ls.builtins.diagnostics.eslint_lsp.with({
-          filetypes = { "javascript", "typescript" },
-        }),
-        null_ls.builtins.diagnostics.yamllint.with({
-          filetypes = { "yaml" },
-        }),
-        null_ls.builtins.diagnostics.markdownlint.with({
-          filetypes = { "markdown" },
-        }),
+        null_ls.builtins.formatting.csharpier.with({ filetypes = { "cs" } }),
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.rubocop,
+        null_ls.builtins.diagnostics.erb_lint,
+        null_ls.builtins.diagnostics.rubocop,
       },
     })
 
