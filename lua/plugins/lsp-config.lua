@@ -24,12 +24,24 @@ return {
 				filetypes = { "html", "ejs" },
 			})
 
-			lspconfig.omnisharp.setup({
-				cmd = { "omnisharp" },
-				handlers = handlers,
-				filetypes = { "cs", "vb", "csx" },
-				root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
+			lspconfig.csharp_ls.setup({
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				on_attach = function(client, bufnr)
+					client.server_capabilities.documentFormattingProvider = false
+					vim.keymap.set("n", "<leader>gf", function()
+						vim.lsp.buf.format({ async = true })
+					end, { buffer = bufnr, desc = "Format current file with LSP" })
+				end,
+			})
+
+			lspconfig.tsserver.setup({
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					client.server_capabilities.documentFormattingProvider = false
+					vim.keymap.set("n", "<leader>gf", function()
+						vim.lsp.buf.format({ async = true })
+					end, { buffer = bufnr, desc = "Format current file with LSP" })
+				end,
 			})
 
 			local luasnip = require("luasnip")
@@ -53,7 +65,7 @@ return {
 					"taplo",
 					"yamlls",
 					"eslint",
-					"omnisharp",
+          "csharp_ls",
 				},
 			})
 		end,

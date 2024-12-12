@@ -17,10 +17,9 @@ return {
           filetypes = { "c", "cpp", "objc", "objcpp" },
         }),
 
-        -- Linters
-    --    null_ls.builtins.diagnostics.eslint_d.with({
-    --      filetypes = { "javascript", "typescript" },
-    --    }),
+        null_ls.builtins.diagnostics.eslint_lsp.with({
+          filetypes = { "javascript", "typescript" },
+        }),
         null_ls.builtins.diagnostics.yamllint.with({
           filetypes = { "yaml" },
         }),
@@ -35,4 +34,3 @@ return {
     end, { desc = "LSP (null-ls) Format file" })
   end,
 }
-

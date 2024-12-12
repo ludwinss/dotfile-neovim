@@ -3,19 +3,16 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local U = require("utils")
-    
     -------- Define colors theme installed in Nvim -----------------
     local text_hl
     local icon_hl
     local green
     local yellow
     local red
-    
     local C
-    
     if vim.g.colors_name == "nordic" then
       C = require("nordic.colors")
-    elseif vim.g.colors_name == "tokyonight-night" then
+    elseif vim.g.colors_name == "tokyonight-moon" then
       C = require("tokyonight.colors.moon")
     end
 
@@ -26,7 +23,7 @@ return {
         green = C.green.base
         yellow = C.yellow.base
         red = C.red.base
-      elseif vim.g.colors_name == "tokyonight-night" then
+      elseif vim.g.colors_name == "tokyonight-moon" then
         text_hl = { fg = C.fg_gutter }
         icon_hl = { fg = C.dark3 }
         green = C.green1
