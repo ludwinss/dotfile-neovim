@@ -1,52 +1,77 @@
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
-    "leoluz/nvim-dap-go",
-    "rcarriga/nvim-dap-ui",
+    "rcarriga/nvim-dap-ui",       -- Interfaz gráfica para ver variables y breakpoints
+    "jay-babu/mason-nvim-dap.nvim", -- Integración con Mason.nvim
   },
   config = function()
-    require("dapui").setup()
-    require("dap-go").setup()
+    local dap = require("dap")
+    local dapui = require("dapui")
 
+    -- 📌 Configurar DAP UI
+    dapui.setup()
 
-  local dap, dapui = require("dap"), require("dapui")
+    -- 📌 Configurar adaptador de depuración para Node.js y TypeScript
+    dap.adapters["pwa-node"] = {
+      type = "server",
+      host = "127.0.0.1",
+      port = 9229,
+      executable = {
+        command = "node",
+        args = { os.getenv("HOME") .. "/.local/share/nvim/vscode-js-debug/out/src/dapDebugServer.js" },
+      },
+    }
 
-   dap.adapters.node2 = {
-     type = "executable",
-     command = "node",
-     args = {
-       require("mason-registry").get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
-     }
-   }
+    -- 📌 Configuración para depurar TypeScript y JavaScript
+    dap.configurations.typescript = {
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch File",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        skipFiles = { "<node_internals>/**" },
+        protocol = "inspector",
+        console = "integratedTerminal",
+      },
+      {
+        type = "pwa-node",
+        request = "attach",
+        name = "Attach to Process",
+        processId = function()
+          local output = vim.fn.system("pgrep -n node")
+          return tonumber(output) or nil
+        end,
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        skipFiles = { "<node_internals>/**" },
+        protocol = "inspector",
+        console = "integratedTerminal",
+      },
+    }
 
-   dap.configurations.typescript = {
-     {
-       type = "node2",
-       request = "attach",
-       program = "${file}",
-       cwd = "${workspaceFolder}",
-       sourceMaps = true,
-       protocol = "inspector",
-       port = 9229,
-     }
-   }
+    dap.configurations.javascript = dap.configurations.typescript
 
-   dap.listeners.before.attach.dapui_config = function()
-     dapui.open()
-   end
-   dap.listeners.before.launch.dapui_config = function()
-     dapui.open()
-   end
-   dap.listeners.before.event_terminated.dapui_config = function()
-     dapui.close()
-   end
-   dap.listeners.before.event_exited.dapui_config = function()
-     dapui.close()
-   end
+    -- 📌 Auto abrir y cerrar DAP UI
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
 
-   vim.keymap.set("n", "<Leader>dt", ":DapToggleBreakpoint<CR>")
-    vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>")
-    vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
-    vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
+    -- 📌 Atajos de teclado
+    vim.keymap.set("n", "<Leader>dt", ":DapToggleBreakpoint<CR>", { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>", { desc = "Continue" })
+    vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>", { desc = "Terminate" })
+    vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>", { desc = "Step Over" })
   end,
 }
+
