@@ -7,6 +7,36 @@ UI.border_chars_outer_thin = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "�
 UI.border_chars_round = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 UI.border_chars_outer_thin_telescope = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" }
 
+UI.kind_icons = {
+    Text = " ",
+    Method = " ",
+    Function = "󰊕 ",
+    Constructor = " ",
+    Field = " ",
+    Variable = " ",
+    Class = "󰠱 ",
+    Interface = " ",
+    Module = "󰏓 ",
+    Property = " ",
+    Unit = " ",
+    Value = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Keyword = "󰌋 ",
+    Snippet = "󰲋 ",
+    Color = " ",
+    File = " ",
+    Reference = " ",
+    Folder = " ",
+    Constant = "󰏿 ",
+    Struct = "󰠱 ",
+    Event = " ",
+    Operator = " ",
+    TypeParameter = "󰘦 ",
+    TabNine = "󰚩 ",
+    Copilot = " ",
+    Unknown = " ",
+}
 
 function UI.get_border_chars(desc)
   local U = require("utils.nvim")

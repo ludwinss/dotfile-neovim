@@ -1,5 +1,5 @@
 local TS = require("telescope")
-local U = require("alex.utils")
+local U = require("utils")
 
 local prompt_chars = { "▔", "▕", " ", "▏", "🭽", "🭾", "▕", "▏" }
 local vert_preview_chars = { " ", "▕", "▁", "▏", "▏", "▕", "🭿", "🭼" }
