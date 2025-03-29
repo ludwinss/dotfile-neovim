@@ -6,7 +6,6 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 

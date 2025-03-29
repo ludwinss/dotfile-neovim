@@ -24,19 +24,29 @@ return {
         filetypes = { "html", "ejs" },
       })
 
-      lspconfig.csharp_ls.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end,
-      })
-
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         capabilities = capabilities,
         on_attach = function(client)
           client.server_capabilities.documentFormattingProvider = false
         end,
+      })
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT", -- importante para Neovim
+              path = vim.split(package.path, ";"),
+            },
+            diagnostics = {
+              globals = { "vim" }, -- 👈 le decís que `vim` es global
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true), -- Neovim API
+              checkThirdParty = false,                           -- opcional
+            },
+            telemetry = { enable = false },
+          },
+        },
       })
 
       local luasnip = require("luasnip")
@@ -55,21 +65,12 @@ return {
           "jsonls",
           "html",
           "remark_ls",
-          "taplo",
           "yamlls",
-          "csharp_ls",
         },
       })
     end,
   },
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-    end,
-  },
+  }
 }

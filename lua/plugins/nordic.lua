@@ -6,7 +6,7 @@ return {
     require("nordic").setup({
       italic_comments = true,
       transparent = {
-        bg = true,
+        bg = false,
         float = false,
       },
     })

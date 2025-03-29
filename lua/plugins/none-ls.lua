@@ -5,12 +5,8 @@ return {
 
     null_ls.setup({
       sources = {
-        null_ls.builtins.diagnostics.erb_lint,
+        null_ls.builtins.formatting.csharpier,
       },
     })
-
-    vim.keymap.set("n", "<leader>gf", function()
-      return vim.lsp.buf.format({ async = true })
-    end, { desc = "LSP (null-ls) Format file" })
   end,
 }
