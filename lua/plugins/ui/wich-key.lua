@@ -1,9 +1,11 @@
 local U = require("utils")
 
 require("which-key").setup({
-    win = {
-        border = U.border_chars_top_only,
-        padding = { 0, 0, 0, 0 },
-    },
+  win = {
+    border = U.border_chars_top_only,
+    padding = { 0, 0, 0, 0 },
+  },
 })
 
+vim.o.timeout = true
+vim.o.timeoutlen = 1000

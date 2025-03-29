@@ -8,5 +8,10 @@ return {
     event = { "User NvimStartupDone" },
     build = { ":TSUpdate" },
     config = function() require("plugins.ui.treesitter") end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = { "User NvimStartupDone" },
+    config = function() require("plugins.ui.wich-key") end,
   }
 }
