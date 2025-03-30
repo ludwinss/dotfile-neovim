@@ -20,6 +20,13 @@ return {
     config = function() require("plugins.languages.mason-lsp") end,
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
+    config = function()
+      require("plugins.languages.mason-tools")
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     lazy = false,
     build = ":MasonUpdate",
@@ -29,7 +36,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     config = function() require("plugins.languages.completitions") end,
     dependencies = {
       "hrsh7th/cmp-omni",
@@ -51,11 +58,19 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
     },
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     build = { ":TSUpdate" },
     config = function() require("plugins.languages.treesitter") end,
   },
   -- UI
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("plugins.ui.oil-ui")
+    end,
+    lazy = false,
+  },
   {
     "glepnir/dashboard-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -64,13 +79,23 @@ return {
     priority = 999,
   },
   {
+    "stevearc/quicker.nvim",
+    event = { "VeryLazy" },
+    config = function()
+      require("plugins.ui.quicker-ui")
+    end,
+  },
+  {
+    "folke/zen-mode.nvim",
+  },
+  {
     "folke/todo-comments.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
     config = function() require("plugins.ui.todo") end,
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
   },
   {
     "nvim-tree/nvim-web-devicons",
@@ -78,13 +103,13 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    event = { "User NvimStartupDone" },
+    lazy = true,
     config = function() require("plugins.ui.colorizer") end,
   },
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     config = function() require("plugins.ui.noice") end,
   },
   {
@@ -102,22 +127,23 @@ return {
       "nvim-tree/nvim-web-devicons",
       "AndreM222/copilot-lualine",
     },
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     config = function() require("plugins.ui.lualine") end,
   },
   {
     "folke/which-key.nvim",
-    event = { "User NvimStartupDone" },
-    config = function() require("plugins.ui.wich-key") end,
+    event = { "VeryLazy" },
+    config = function() require("plugins.ui.which-key") end,
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     config = function() require("plugins.ui.gitsigns") end,
   },
   {
     "f-person/git-blame.nvim",
     cmd = { "GitBlameToggle" },
+    config = function() require("plugins.ui.git-blame") end,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -161,7 +187,7 @@ return {
   },
   {
     "aserowy/tmux.nvim",
-    event = { "User NvimStartupDone" },
+    event = "VeryLazy",
     config = function() require("tmux").setup() end,
   },
   {
@@ -186,7 +212,7 @@ return {
       "rcarriga/nvim-notify",
       "nvim-tree/nvim-web-devicons",
     },
-    config = function() require("plugins.languages.leetcode") end
+    config = function() require("plugins.languages.leetcode-config") end
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -245,6 +271,4 @@ return {
       }
     end
   }
-
-
 }

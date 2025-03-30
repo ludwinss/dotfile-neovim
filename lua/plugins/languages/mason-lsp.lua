@@ -3,7 +3,6 @@ local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
   ensure_installed = {
     "cssls",
-    "nixd",
     "lua_ls",
     "julials",
     "bashls",
@@ -14,13 +13,13 @@ mason_lspconfig.setup({
     "gopls",
     "terraformls",
     "eslint",
-    "tsserver",
+    "ts_ls",
     "cmake",
     "dockerls",
     "docker_compose_language_service",
     "html",
     "jsonls",
-    "csharp_ls",
+    "omnisharp",
   },
   automatic_installation = true,
 })

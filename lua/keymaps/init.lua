@@ -8,9 +8,10 @@ local n, i, v, t = "n", "i", "v", "t"
 function K.init()
   K.git()
   K.lsp()
+  K.native()
   K.null_ls()
-  K.tree()
   K.telescope()
+  K.tree()
 end
 
 function K.native()
@@ -27,14 +28,13 @@ function K.native()
 end
 
 function K.git()
+  keymap(n, "<leader>gt", "<Cmd>GitBlameToggle<CR>",
+    vim.tbl_extend("force", default_opts, {
+      desc = "Ver quién modificó esta línea"
+    }))
   keymap(n, "<leader>gp", ":Gitsigns preview_hunk<CR>",
     vim.tbl_extend("force", default_opts, {
       desc = "Ver cambios del hunk actual"
-    }))
-
-  keymap(n, "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>",
-    vim.tbl_extend("force", default_opts, {
-      desc = "Ver quién modificó esta línea"
     }))
 
   keymap(n, "<leader>gs", ":Gitsigns stage_hunk<CR>",
