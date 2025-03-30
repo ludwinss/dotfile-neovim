@@ -95,5 +95,3 @@ vim.schedule(function()
     },
   })
 end)
-
-require("keymaps").debugger()

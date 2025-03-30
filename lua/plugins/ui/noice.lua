@@ -118,6 +118,3 @@ require("notify").setup({
   max_width = 70,
   min_width = 70,
 })
-
-require("keymaps").noice()
-

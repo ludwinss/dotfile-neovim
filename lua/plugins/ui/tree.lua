@@ -126,6 +126,3 @@ api.events.subscribe(Event.TreeOpen, function(_)
     vim.cmd([[setlocal fillchars+=vertleft:🮇]])
     vim.cmd([[setlocal fillchars+=verthoriz:🮇]])
 end)
-
-require("keymaps").tree()
-

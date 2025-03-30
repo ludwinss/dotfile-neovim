@@ -34,4 +34,14 @@ function M.get_git_compare()
     return ""
 end
 
+function M.get_git_root()
+    local handle = io.popen("git rev-parse --show-toplevel")
+    if handle then
+        local dir = handle:read("*a")
+        handle:close()
+        return dir:gsub("\n", "")
+    end
+end
+
+
 return M

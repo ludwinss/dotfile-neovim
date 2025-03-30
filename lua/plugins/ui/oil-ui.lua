@@ -13,9 +13,6 @@ require("oil").setup({
   default_file_explorer = true,
 })
 
--- TODOL: add keymaps
---require("keymaps").oil()
-
 require("oil.view").set_is_hidden_file(function(name, buffer)
   return false
 end)
