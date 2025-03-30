@@ -12,16 +12,17 @@ local n_v = { n, v }
 local allow_remap = { noremap = false, silent = true }
 
 function M.init()
+  M.debugger()
+  M.editing()
   M.git()
   M.lsp()
   M.native()
-  M.null_ls()
-  M.telescope()
-  M.editing()
-  M.tree()
   M.noice()
-  M.debugger()
+  M.null_ls()
   M.oil()
+  M.telescope()
+  M.tree()
+  M.zenmode()
 end
 
 function M.native()
@@ -179,8 +180,8 @@ end
 function M.null_ls()
   keymap(n, "<leader>gf", function()
     return vim.lsp.buf.format({
-      async = false,
-      filter = function(client) return client.name == "eslint" end
+      async = true,
+      -- filter = function(client) return client.name == "eslint" end
     })
   end, vim.tbl_extend("force", default_opts, {
     desc = "Formatear archivo"
@@ -394,6 +395,12 @@ function M.debugger()
     vim.tbl_extend("force", default_opts, {
       desc = "Reiniciar frame"
     }))
+end
+
+function M.zenmode()
+  keymap(n, "<leader>z", "<Cmd>ZenMode<CR>", vim.tbl_extend("force", default_opts, {
+    desc = "Activar/Desactivar Zen Mode"
+  }))
 end
 
 function M.oil()

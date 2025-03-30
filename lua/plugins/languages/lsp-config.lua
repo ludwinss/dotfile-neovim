@@ -35,14 +35,12 @@ LC.eslint.setup({
   lsp_flags = lsp_flags,
   capabilities = DC,
   root_dir = LU.root_pattern(".eslintrc", "package.json", ".git"),
-  on_attach = function(client, bufnr)
-    if client.name == "eslint" then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        command = "EslintFixAll",
-      })
-    end
-  end
+  settings = {
+    format = false,
+  },
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
 })
 
 LC.ts_ls.setup({
