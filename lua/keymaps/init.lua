@@ -36,7 +36,6 @@ function M.native()
     keymap(t, "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
     keymap(t, "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
 
-    -- Misc
     keymap(n, "<Esc>", "<Cmd>noh<CR>", allow_remap)
     keymap(n_v, "<C-e>", "j<C-e>", default_opts)
     keymap(n_v, "<C-y>", "k<C-y>", default_opts)
@@ -59,9 +58,11 @@ function M.editing()
     keymap(v, "i", "I", default_opts)
     keymap(n, "s", function()
         require("leap").leap({})
+        default_opts = { noremap = true, silent = true, desc = "Saltar hacia adelante" }
     end)
     keymap(n, "S", function()
         require("leap").leap({ backward = true })
+        default_opts = { noremap = true, silent = true, desc = "Saltar hacia atrás" }
     end)
     keymap(n, "<leader>v", function()
         require("keymaps.utils").toggle_diffview()
@@ -107,32 +108,59 @@ function M.lsp()
 
     keymap(n, "RR", function()
         pcall(vim.lsp.buf.rename)
-    end, default_opts)
-    keymap(n, "gi", "<Cmd>Telescope lsp_implementations<CR>", default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Renombrar símbolo"
+    }))
+
+    keymap(n, "gi", "<Cmd>Telescope lsp_implementations<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Buscar implementaciones"
+    }))
+
     keymap(n, "gh", function()
         pcall(vim.lsp.buf.hover)
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Documentación flotante"
+    }))
+
     keymap(n_i, "<C-\\>", function()
         pcall(vim.lsp.buf.signature_help)
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ayuda de firma"
+    }))
 
     keymap(n, "ge", function()
         require("alex.native.lsp").open_diagnostics_float()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ventana flotante de diagnósticos"
+    }))
+
     keymap(n, "[e", function()
         require("alex.native.lsp").prev_diag()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Diagnóstico anterior"
+    }))
+
     keymap(n, "]e", function()
         require("alex.native.lsp").next_diag()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Siguiente diagnóstico"
+    }))
+
     keymap(n, "[E", function()
         require("alex.native.lsp").prev_error()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Error anterior"
+    }))
+
     keymap(n, "]E", function()
         require("alex.native.lsp").next_error()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Siguiente error"
+    }))
 
-    keymap(n, "<leader>l", "<Cmd>LspInfo<CR>", default_opts)
+    keymap(n, "<leader>l", "<Cmd>LspInfo<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Ver información de LSP"
+    }))
 end
 
 function M.null_ls()
@@ -166,62 +194,114 @@ function M.telescope()
 
     keymap(n, "fh", function()
         require("telescope.builtin").help_tags({})
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ver páginas de ayuda"
+    }))
+
     keymap(n, "z=", function()
         require("telescope.builtin").spell_suggest({})
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Sugerencias de ortografía"
+    }))
+
     keymap(n, "fk", function()
         require("telescope.builtin").keymaps({})
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ver keymaps"
+    }))
+
     keymap(n, "fj", function()
         require("telescope.builtin").jumplist({ cwd = vim.loop.cwd() })
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ver jumplist"
+    }))
+
     keymap(n, "fm", function()
         require("telescope.builtin").man_pages({ sections = { "ALL" } })
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ver páginas de manual"
+    }))
 
     keymap(n, "fo", function()
         require("telescope.builtin").oldfiles({ cwd = vim.loop.cwd() })
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Archivos recientes (cwd)"
+    }))
+
     keymap(n, "fO", function()
         require("telescope.builtin").oldfiles({ cwd = vim.fn.expand("~") })
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Archivos recientes (home)"
+    }))
+
     keymap(n, "ff", function()
         require("telescope.builtin").find_files({})
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Buscar archivos (cwd)"
+    }))
+
     keymap(n, "fF", function()
         require("telescope.builtin").find_files({ cwd = vim.fn.expand("~") })
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Buscar archivos (home)"
+    }))
+
     keymap(n, "<C-f>", function()
         require("telescope.builtin").current_buffer_fuzzy_find({
             previewer = false,
             results_ts_highlight = false,
             wrap_results = false,
         })
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Buscar texto en buffer actual"
+    }))
 
-    keymap(n, "fG", "<Cmd>Telescope live_grep disable_coordinates=true<CR>", default_opts)
+    keymap(n, "fG", "<Cmd>Telescope live_grep disable_coordinates=true<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Live grep global"
+    }))
 
-    keymap(n, "<C-n>", "<Cmd>Telescope buffers previewer=false<CR>", default_opts)
-    keymap(n, "fd", "<Cmd>Telescope diagnostics line_width=full bufnr=0<CR>", default_opts)
-    keymap(n, "fD", "<Cmd>Telescope diagnostics line_width=full<CR>", default_opts)
+    keymap(n, "<C-n>", "<Cmd>Telescope buffers previewer=false<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Ver buffers abiertos"
+    }))
+
+    keymap(n, "fd", "<Cmd>Telescope diagnostics line_width=full bufnr=0<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Diagnósticos buffer actual"
+    }))
+
+    keymap(n, "fD", "<Cmd>Telescope diagnostics line_width=full<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Diagnósticos globales"
+    }))
 
     keymap(n_v, "fg", function()
         require("telescope.builtin").registers()
-    end, default_opts)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Ver registros"
+    }))
 
-    keymap(n, "ft", "<Cmd>TodoTelescope previewer=false wrap_results=false<CR>", default_opts)
+    keymap(n, "ft", "<Cmd>TodoTelescope previewer=false wrap_results=false<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Ver TODOs"
+    }))
+
     keymap(
         n,
         "fT",
         "<Cmd>TodoTelescope previewer=false wrap_results=false cwd=" .. U.get_git_root() .. "<CR>",
-        default_opts
+        vim.tbl_extend("force", default_opts, {
+            desc = "Ver TODOs (root)"
+        })
     )
 
-    -- For LSP.
-    keymap(n, "fs", "<Cmd>Telescope lsp_document_symbols<CR>", default_opts)
-    keymap(n, "gr", "<Cmd>Telescope lsp_references<CR>", default_opts)
-    keymap(n, "gd", "<Cmd>Telescope lsp_definitions<CR>", default_opts)
+    keymap(n, "fs", "<Cmd>Telescope lsp_document_symbols<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Símbolos de documento"
+    }))
+
+    keymap(n, "gr", "<Cmd>Telescope lsp_references<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Referencias LSP"
+    }))
+
+    keymap(n, "gd", "<Cmd>Telescope lsp_definitions<CR>", vim.tbl_extend("force", default_opts, {
+        desc = "Definiciones LSP"
+    }))
 end
 
 function M.completion()
@@ -303,7 +383,9 @@ end
 function M.oil()
     keymap(n, "<leader>e", function()
         require("alex.keymaps.utils").toggle_oil()
-    end)
+    end, vim.tbl_extend("force", default_opts, {
+        desc = "Abrir/ocultar Oil"
+    }))
     require("oil").setup({
         keymaps = {
             ["<CR>"] = "actions.select",
@@ -313,15 +395,20 @@ function M.oil()
     })
 end
 
--- TODO: clean this shit
 function M.noice()
     keymap({ "n", "i", "s" }, "<C-d>", function()
         if not require("noice.lsp").scroll(4) then return "<C-d>" end
-    end, { silent = true, expr = true })
+    end, vim.tbl_extend("force", default_opts, {
+        expr = true,
+        desc = "Desplazar contenido (down)"
+    }))
 
     keymap({ "n", "i", "s" }, "<C-u>", function()
         if not require("noice.lsp").scroll(-4) then return "<C-u>" end
-    end, { silent = true, expr = true })
+    end, vim.tbl_extend("force", default_opts, {
+        expr = true,
+        desc = "Desplazar contenido (up)"
+    }))
 end
 
 return M
