@@ -40,4 +40,3 @@ sign(
     { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
 )
 sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-

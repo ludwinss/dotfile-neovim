@@ -61,4 +61,5 @@ local search = {
 }
 CMP.setup.cmdline({ "/", "?" }, search)
 
-require("keymaps").completion()
+-- TODO: clean this shit
+-- require("keymaps").completion()

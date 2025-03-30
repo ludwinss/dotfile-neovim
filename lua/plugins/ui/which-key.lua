@@ -1,5 +1,4 @@
 require("which-key").setup({
-  delay = 750,
   win = {
     border = "none",
     padding = { 1, 1 },

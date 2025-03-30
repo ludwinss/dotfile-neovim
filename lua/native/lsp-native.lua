@@ -106,12 +106,12 @@ end
 M.format_enabled = false
 function M.toggle_format_enabled()
     M.format_enabled = not M.format_enabled
-    require("alex.utils").refresh_statusline()
+    require("utils").refresh_statusline()
 end
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     callback = function()
-        local L = require("alex.native.lsp")
+        local L = require("native.lsp-native")
         if L.format_enabled then
             L.format_buffer()
         end
