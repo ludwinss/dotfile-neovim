@@ -44,7 +44,7 @@ function M.toggle_oil()
   if U.current_buffer_filetype() == "oil" then
     pcall(vim.api.nvim_command, "b#")
   else
-    vim.cmd("Oil")
+    vim.cmd("Oil --float")
   end
 end
 

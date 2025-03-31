@@ -164,13 +164,6 @@ return {
     cmd = { "DiffviewClose", "DiffviewOpen" },
     config = function() require("plugins.ui.diffview") end,
   },
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function() require("plugins.ui.tree") end,
-    keys = { "<leader>f", "gf" },
-  },
   -- THEMES
   {
     "AlexvZyl/nordic.nvim",

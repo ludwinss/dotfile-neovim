@@ -22,7 +22,6 @@ function M.init()
   M.oil()
   M.telescope()
   M.editing()
-  M.tree()
   M.zenmode()
   M.completion()
 end
@@ -79,30 +78,24 @@ function M.editing()
     require("leap").leap({ backward = true })
     default_opts = { noremap = true, silent = true, desc = "Saltar hacia atrás" }
   end)
-  keymap(n, "<leader>v", function()
-    require("keymaps.utils").toggle_diffview()
-    default_opts = { noremap = true, silent = true, desc = "Ver diff" }
-  end)
 end
 
 function M.git()
-  keymap(n, "<leader>gt", "<Cmd>GitBlameToggle<CR>",
+  keymap(n, "<leader>v", function()
+      require("keymaps.utils").toggle_diffview()
+    end,
     vim.tbl_extend("force", default_opts, {
-      desc = "Ver quién modificó esta línea"
-    }))
-  keymap(n, "<leader>gp", ":Gitsigns preview_hunk<CR>",
-    vim.tbl_extend("force", default_opts, {
-      desc = "Ver cambios del hunk actual"
+      desc = "Ver diffview"
     }))
 
-  keymap(n, "<leader>gs", ":Gitsigns stage_hunk<CR>",
+  keymap(n, "<leader>b", "<Cmd>GitBlameToggle<CR>",
     vim.tbl_extend("force", default_opts, {
-      desc = "Staggear hunk actual"
+      desc = "Culpa"
     }))
 end
 
 function M.lsp()
-  keymap(n, "M", vim.lsp.buf.hover,
+  keymap(n, "K", vim.lsp.buf.hover,
     vim.tbl_extend("force", default_opts, {
       desc = "Mostrar documentación flotante"
     }))
@@ -189,13 +182,6 @@ function M.null_ls()
   end, vim.tbl_extend("force", default_opts, {
     desc = "Formatear archivo"
   }))
-end
-
-function M.tree()
-  vim.api.nvim_set_keymap(n, '<C-n>', ':NvimTreeToggle<CR>',
-    vim.tbl_extend("force", default_opts, {
-      desc = "Abrir árbol de archivos"
-    }))
 end
 
 function M.telescope()
@@ -400,25 +386,22 @@ function M.debugger()
     }))
 end
 
+-- TODO: dont touch
 function M.zenmode()
   keymap(n, "<leader>z", "<Cmd>ZenMode<CR>", vim.tbl_extend("force", default_opts, {
     desc = "Activar/Desactivar Zen Mode"
   }))
 end
 
+-- TODO: dont touch
 function M.oil()
   keymap(n, "<leader>e", function()
-    require("keymaps.utils").toggle_oil()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Abrir/ocultar Oil"
-  }))
-  require("oil").setup({
-    keymaps = {
-      ["<CR>"] = "actions.select",
-      ["-"] = "actions.parent",
-    },
-    use_default_keymaps = false,
-  })
+      require("keymaps.utils").toggle_oil()
+    end,
+    vim.tbl_extend("force", default_opts, {
+      desc = "Abrir explorador de archivos"
+    })
+  )
 end
 
 function M.noice()
