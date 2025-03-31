@@ -80,6 +80,7 @@ function M.editing()
   end)
 end
 
+--TODO: dont touch
 function M.git()
   keymap(n, "<leader>v", function()
       require("keymaps.utils").toggle_diffview()

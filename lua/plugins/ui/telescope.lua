@@ -90,6 +90,13 @@ local defaults = {
     i = {
       ["<Esc>"] = require("telescope.actions").close,
       ["<C-Esc>"] = require("telescope.actions").close,
+      ["q"] = require("telescope.actions").close,
+      ["j"] = require("telescope.actions").move_selection_next,
+      ["k"] = require("telescope.actions").move_selection_previous,
+    },
+    n = {
+      ["j"] = require("telescope.actions").move_selection_next,
+      ["k"] = require("telescope.actions").move_selection_previous,
     },
   },
 
@@ -119,13 +126,22 @@ TS.setup({
     lsp_references = small_lsp_layout,
     lsp_implementations = small_lsp_layout,
 
-    live_grep = { preview_title = "" },
+    live_grep = {
+      preview_title = "",
+      cwd = U.current_work_dir(),
+    },
     help_tags = {
       preview_title = "",
       mappings = { i = { ["<CR>"] = require("telescope.actions").select_vertical } },
     },
-    oldfiles = { preview_title = "" },
-    find_files = { preview_title = "" },
+    oldfiles = {
+      preview_title = "",
+      cwd = U.current_work_dir(),
+    },
+    find_files = {
+      preview_title = "",
+      cwd = U.current_work_dir(),
+    },
     lsp_document_symbols = { preview_title = "" },
     man_pages = {
       preview_title = "",
