@@ -12,7 +12,7 @@ local n_v = { n, v }
 local allow_remap = { noremap = false, silent = true }
 
 function M.init()
-  M.debugger()
+  -- M.debugger()
   M.editing()
   M.git()
   M.lsp()
@@ -183,6 +183,7 @@ function M.null_ls()
   keymap(n, "<leader>gf", function()
     return vim.lsp.buf.format({
       async = true,
+      -- TODO : Cambiar a null-ls
       -- filter = function(client) return client.name == "eslint" end
     })
   end, vim.tbl_extend("force", default_opts, {
