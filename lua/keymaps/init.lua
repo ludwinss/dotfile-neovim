@@ -21,8 +21,10 @@ function M.init()
   M.null_ls()
   M.oil()
   M.telescope()
+  M.editing()
   M.tree()
   M.zenmode()
+  M.completion()
 end
 
 function M.native()
@@ -120,61 +122,61 @@ function M.lsp()
       desc = "Acciones de código"
     }))
 
-  keymap(n, "RR", function()
-    pcall(vim.lsp.buf.rename)
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Renombrar símbolo"
-  }))
-
-  keymap(n, "gi", "<Cmd>Telescope lsp_implementations<CR>", vim.tbl_extend("force", default_opts, {
-    desc = "Buscar implementaciones"
-  }))
-
-  keymap(n, "gh", function()
-    pcall(vim.lsp.buf.hover)
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Documentación flotante"
-  }))
-
-  keymap(n_i, "<C-\\>", function()
-    pcall(vim.lsp.buf.signature_help)
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Ayuda de firma"
-  }))
-
-  keymap(n, "ge", function()
-    require("native.lsp-native").open_diagnostics_float()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Ventana flotante de diagnósticos"
-  }))
-
-  keymap(n, "[e", function()
-    require("native.lsp-native").prev_diag()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Diagnóstico anterior"
-  }))
-
-  keymap(n, "]e", function()
-    require("native.lsp-native").next_diag()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Siguiente diagnóstico"
-  }))
-
-  keymap(n, "[E", function()
-    require("native.lsp-native").prev_error()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Error anterior"
-  }))
-
-  keymap(n, "]E", function()
-    require("native.lsp-native").next_error()
-  end, vim.tbl_extend("force", default_opts, {
-    desc = "Siguiente error"
-  }))
-
-  keymap(n, "<leader>l", "<Cmd>LspInfo<CR>", vim.tbl_extend("force", default_opts, {
-    desc = "Ver información de LSP"
-  }))
+  -- keymap(n, "RR", function()
+  --   pcall(vim.lsp.buf.rename)
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Renombrar símbolo"
+  -- }))
+  --
+  -- keymap(n, "gi", "<Cmd>Telescope lsp_implementations<CR>", vim.tbl_extend("force", default_opts, {
+  --   desc = "Buscar implementaciones"
+  -- }))
+  --
+  -- keymap(n, "gh", function()
+  --   pcall(vim.lsp.buf.hover)
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Documentación flotante"
+  -- }))
+  --
+  -- keymap(n_i, "<C-\\>", function()
+  --   pcall(vim.lsp.buf.signature_help)
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Ayuda de firma"
+  -- }))
+  --
+  -- keymap(n, "ge", function()
+  --   require("native.lsp-native").open_diagnostics_float()
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Ventana flotante de diagnósticos"
+  -- }))
+  --
+  -- keymap(n, "[e", function()
+  --   require("native.lsp-native").prev_diag()
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Diagnóstico anterior"
+  -- }))
+  --
+  -- keymap(n, "]e", function()
+  --   require("native.lsp-native").next_diag()
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Siguiente diagnóstico"
+  -- }))
+  --
+  -- keymap(n, "[E", function()
+  --   require("native.lsp-native").prev_error()
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Error anterior"
+  -- }))
+  --
+  -- keymap(n, "]E", function()
+  --   require("native.lsp-native").next_error()
+  -- end, vim.tbl_extend("force", default_opts, {
+  --   desc = "Siguiente error"
+  -- }))
+  --
+  -- keymap(n, "<leader>l", "<Cmd>LspInfo<CR>", vim.tbl_extend("force", default_opts, {
+  --   desc = "Ver información de LSP"
+  -- }))
 end
 
 function M.null_ls()
@@ -331,7 +333,7 @@ function M.completion()
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["C-j"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
