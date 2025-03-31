@@ -120,6 +120,7 @@ return {
     event = "VeryLazy",
     config = function() require("plugins.ui.noice") end,
   },
+  { 'nvim-telescope/telescope-ui-select.nvim' },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
