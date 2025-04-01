@@ -58,8 +58,8 @@ local search = {
   window = search_window,
   mapping = CMP.mapping.preset.cmdline(),
   sources = CMP.config.sources({ { name = "buffer" } }),
+  completion = {
+    autocomplete = false
+  },
 }
 CMP.setup.cmdline({ "/", "?" }, search)
-
--- TODO: clean this shit
--- require("keymaps").completion()
