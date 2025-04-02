@@ -311,6 +311,7 @@ function M.telescope()
   }))
 end
 
+-- TODO: dont to
 function M.completion()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
@@ -319,9 +320,8 @@ function M.completion()
       ["<C-u>"] = cmp.mapping.scroll_docs(-4),
       ["<C-d>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["q"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
-      ["j"] = cmp.mapping(function(fallback)
+      ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
@@ -330,7 +330,7 @@ function M.completion()
           fallback()
         end
       end, { "i", "s" }),
-      ["k"] = cmp.mapping(function(fallback)
+      ["<C-k>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
