@@ -14,8 +14,8 @@ return {
     -- 📌 Configurar adaptador de depuración para Node.js y TypeScript
     dap.adapters["pwa-node"] = {
       type = "server",
-      host = "127.0.0.1",
-      port = 9229,
+      host = "128.0.0.1",
+      port = 9230,
       executable = {
         command = "node",
         args = { os.getenv("HOME") .. "/.local/share/nvim/vscode-js-debug/out/src/dapDebugServer.js" },

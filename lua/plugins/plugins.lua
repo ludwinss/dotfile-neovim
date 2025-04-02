@@ -4,14 +4,14 @@ return {
     "rmagatti/auto-session",
     config = function() require("plugins.languages.sessions") end,
   },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = { "mason.nvim" },
-    config = function()
-      require("plugins.languages.null-ls")
-    end,
-
-  },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   dependencies = { "mason.nvim" },
+  --   config = function()
+  --     require("plugins.languages.null-ls")
+  --   end,
+  --
+  -- },
   {
     "neovim/nvim-lspconfig",
     config = function() require("plugins.languages.lsp-config") end,
@@ -186,6 +186,18 @@ return {
   {
     "github/copilot.vim",
     config = function() require("plugins.languages.copilot") end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function() require("plugins.ui.dapui") end,
+      },
+    },
+    event =  "VeryLazy",
+    config = function() require("plugins.languages.dap.init") end,
   },
   {
     "aserowy/tmux.nvim",
