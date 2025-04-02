@@ -12,7 +12,7 @@ local n_v = { n, v }
 local allow_remap = { noremap = false, silent = true }
 
 function M.init()
-  -- M.debugger()
+  M.debugger()
   M.editing()
   M.git()
   M.lsp()
@@ -344,7 +344,7 @@ function M.completion()
 end
 
 function M.debugger()
-  keymap(n, "<C-b>", "<Cmd>DapToggleBreakpoint<CR>",
+  keymap(n, "<leader>db", "<Cmd>DapToggleBreakpoint<CR>",
     vim.tbl_extend("force", default_opts, {
       desc = "Poner breakpoint"
     }))
@@ -361,7 +361,7 @@ function M.debugger()
     desc = "Abrir UI de debugger"
   }))
 
-  keymap(n, "<F2>", "<Cmd>DapContinue<CR>",
+  keymap(n, "<leader>dc", "<Cmd>DapContinue<CR>",
     vim.tbl_extend("force", default_opts, {
       desc = "Continuar debugger"
     }))

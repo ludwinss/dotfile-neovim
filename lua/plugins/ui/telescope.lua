@@ -88,6 +88,7 @@ local defaults = {
   wrap_results = true,
   mappings = {
     n = {
+      ["q"] = require("telescope.actions").close,
       ["j"] = require("telescope.actions").move_selection_next,
       ["k"] = require("telescope.actions").move_selection_previous,
     },

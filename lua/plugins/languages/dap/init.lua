@@ -1,1 +1,1 @@
-require("plugins.languages.dap.ts-dap")
+require("plugins.languages.dap.nestjs-dap")

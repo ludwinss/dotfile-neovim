@@ -196,7 +196,7 @@ return {
         config = function() require("plugins.ui.dapui") end,
       },
     },
-    event =  "VeryLazy",
+    event = "VeryLazy",
     config = function() require("plugins.languages.dap.init") end,
   },
   {
