@@ -344,7 +344,7 @@ function M.completion()
 end
 
 function M.debugger()
-  keymap(n, "<leader>db", "<Cmd>DapToggleBreakpoint<CR>",
+  keymap(n, "<C-b>", "<Cmd>DapToggleBreakpoint<CR>",
     vim.tbl_extend("force", default_opts, {
       desc = "Poner breakpoint"
     }))
