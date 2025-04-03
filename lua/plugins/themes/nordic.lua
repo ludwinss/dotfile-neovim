@@ -4,6 +4,10 @@ require("nordic").setup({
     bg = false,
     float = false,
   },
+  on_highlight = function(highlights, pallette)
+    highlights.Visual = { bg = pallette.orange.base, fg = pallette.black2 }
+    return highlights
+  end,
 })
 
 require("nordic").load({
