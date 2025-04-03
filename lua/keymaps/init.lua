@@ -311,7 +311,7 @@ function M.telescope()
   }))
 end
 
--- TODO: dont to
+-- TODO: dont touch
 function M.completion()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
@@ -320,7 +320,18 @@ function M.completion()
       ["<C-u>"] = cmp.mapping.scroll_docs(-4),
       ["<C-d>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      ["<CR>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          local entry = cmp.get_selected_entry()
+          if not entry then
+            fallback()
+          else
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          end
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
