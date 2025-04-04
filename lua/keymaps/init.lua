@@ -47,9 +47,9 @@ function M.native()
   keymap(n_v, "<C-y>", "k<C-y>", vim.tbl_extend("force", default_opts, {
     desc = "Desplazar hacia arriba"
   }))
-  keymap(n, "K", "<nop>", vim.tbl_extend("force", default_opts, {
-    desc = "Desactivar K"
-  }))
+  -- keymap(n, "K", "<nop>", vim.tbl_extend("force", default_opts, {
+  --   desc = "Desactivar K"
+  -- }))
   keymap(n, "<leader>d", function()
     require("native.lsp-native").toggle_virtual_diagnostics()
     default_opts = { noremap = true, silent = true, desc = "Desactivar diagnósticos virtuales" }
