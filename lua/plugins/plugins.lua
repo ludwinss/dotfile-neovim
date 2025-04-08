@@ -9,7 +9,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		config = function()
-			require("plugins.languages.conform")
+			require("plugins.languages.conform-nvim")
 		end,
 	},
 	{
@@ -161,7 +161,7 @@ return {
 		},
 		event = "VeryLazy",
 		config = function()
-			require("plugins.ui.lualine")
+			require("plugins.ui.lualine-nvim")
 		end,
 	},
 	{
@@ -235,7 +235,7 @@ return {
 			{
 				"rcarriga/nvim-dap-ui",
 				config = function()
-					require("plugins.ui.dapui")
+					require("plugins.ui.dapui-nvim")
 				end,
 			},
 		},

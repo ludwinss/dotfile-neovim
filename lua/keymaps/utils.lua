@@ -15,7 +15,7 @@ end
 
 M.DAP_UI_ENABLED = false
 function M.dap_toggle_ui()
-	require("dapui").toggle()
+	require("plugins.ui.dapui-nvim").toggle()
 	M.DAP_UI_ENABLED = not M.DAP_UI_ENABLED
 end
 
@@ -23,7 +23,7 @@ function M.dap_float_scope()
 	if not M.DAP_UI_ENABLED then
 		return
 	end
-	require("dapui").float_element("scopes")
+	require("plugins.ui.dapui-nvim").float_element("scopes")
 end
 
 function M.toggle_diffview()

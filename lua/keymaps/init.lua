@@ -204,15 +204,6 @@ function M.lsp()
 			desc = "Siguiente error",
 		})
 	)
-
-	keymap(
-		n,
-		"<leader>l",
-		"<Cmd>LspInfo<CR>",
-		vim.tbl_extend("force", default_opts, {
-			desc = "Ver información de LSP",
-		})
-	)
 end
 
 function M.conformkeymap()

@@ -6,7 +6,7 @@ return {
   },
   config = function()
     local dap = require("dap")
-    local dapui = require("dapui")
+    local dapui = require("lua.plugins.ui.dapui-nvim")
 
     -- 📌 Configurar DAP UI
     dapui.setup()
