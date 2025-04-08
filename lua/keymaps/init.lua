@@ -14,7 +14,7 @@ function M.init()
 	M.git()
 	M.lsp()
 	M.native()
-	M.conform()
+	M.conformkeymap()
 	M.oil()
 	M.telescope()
 	M.editing()
@@ -74,14 +74,14 @@ end
 function M.editing()
 	keymap(i, "<Esc>", "<Esc>`^", default_opts)
 	keymap(v, "<Esc>", "v", default_opts)
+
 	keymap(n, "s", function()
 		require("leap").leap({})
-		default_opts = { noremap = true, silent = true, desc = "Saltar hacia adelante" }
-	end)
+	end, vim.tbl_extend("force", default_opts, { desc = "Saltar hacia adelante" }))
+
 	keymap(n, "S", function()
 		require("leap").leap({ backward = true })
-		default_opts = { noremap = true, silent = true, desc = "Saltar hacia atrás" }
-	end)
+	end, vim.tbl_extend("force", default_opts, { desc = "Saltar hacia atrás" }))
 end
 
 --TODO: dont touch
@@ -215,7 +215,7 @@ function M.lsp()
 	)
 end
 
-function M.conform()
+function M.conformkeymap()
 	keymap(
 		n,
 		"<leader>gf",

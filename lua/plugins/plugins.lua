@@ -261,7 +261,7 @@ return {
 		dependencies = "tpope/vim-repeat",
 		keys = { "s", "S" },
 		config = function()
-			require("plugins.ui.leap")
+			require("plugins.ui.leap-nvim")
 		end,
 	},
 	{
