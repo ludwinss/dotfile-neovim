@@ -1,3 +1,3 @@
 require("leetcode").setup({
-  lang = "rust",
+	lang = "rust",
 })

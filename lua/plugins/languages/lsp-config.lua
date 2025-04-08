@@ -2,16 +2,15 @@ local LU = require("lspconfig.util")
 local LC = require("lspconfig")
 local DC = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig.ui.windows").default_options.border =
-    require("utils").get_border_chars("float")
+require("lspconfig.ui.windows").default_options.border = require("utils").get_border_chars("float")
 
 local lsp_flags = {
-  debounce_text_changes = 250,
+	debounce_text_changes = 250,
 }
 
 local default = {
-  lsp_flags = lsp_flags,
-  capabilities = DC,
+	lsp_flags = lsp_flags,
+	capabilities = DC,
 }
 
 LC.cssls.setup({ default })
@@ -32,58 +31,58 @@ LC.terraformls.setup({ default })
 -- })
 
 LC.eslint.setup({
-  lsp_flags = lsp_flags,
-  capabilities = DC,
-  root_dir = LU.root_pattern(".eslintrc", "package.json", ".git"),
-  settings = {
-    format = false,
-  },
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
-  end,
+	lsp_flags = lsp_flags,
+	capabilities = DC,
+	root_dir = LU.root_pattern(".eslintrc", "package.json", ".git"),
+	settings = {
+		format = false,
+	},
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = true
+		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+	end,
 })
 
 LC.ts_ls.setup({
-  lsp_flags = lsp_flags,
-  capabilities = DC,
-  root_dir = LU.root_pattern("tsconfig.json", "package.json", ".git"),
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
+	lsp_flags = lsp_flags,
+	capabilities = DC,
+	root_dir = LU.root_pattern("tsconfig.json", "package.json", ".git"),
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
 })
 
 LC.cmake.setup({
-  lsp_flags = lsp_flags,
-  capabilities = DC,
-  root_dir = LU.root_pattern("CMakeLists.txt"),
+	lsp_flags = lsp_flags,
+	capabilities = DC,
+	root_dir = LU.root_pattern("CMakeLists.txt"),
 })
 
 LC.dockerls.setup({
-  lsp_flags = lsp_flags,
-  capabilities = DC,
-  root_dir = LU.root_pattern({
-    "[dD]ockerfile*",
-  }),
+	lsp_flags = lsp_flags,
+	capabilities = DC,
+	root_dir = LU.root_pattern({
+		"[dD]ockerfile*",
+	}),
 })
 
 LC.docker_compose_language_service.setup({
-  default.lsp_flags,
-  default.capabilities,
-  root_dir = LU.root_pattern({
-    "docker-compose.ya?ml",
-    "compose.ya?ml",
-  }),
+	default.lsp_flags,
+	default.capabilities,
+	root_dir = LU.root_pattern({
+		"docker-compose.ya?ml",
+		"compose.ya?ml",
+	}),
 })
 
 LC.html.setup({
-  capabilities = DC,
-  lsp_flags = lsp_flags,
-  cmd = { "html-languageserver" },
+	capabilities = DC,
+	lsp_flags = lsp_flags,
+	cmd = { "html-languageserver" },
 })
 
 LC.jsonls.setup({
-  capabilities = DC,
-  lsp_flags = lsp_flags,
-  cmd = { "json-languageserver", "--stdio" },
+	capabilities = DC,
+	lsp_flags = lsp_flags,
+	cmd = { "json-languageserver", "--stdio" },
 })

@@ -43,7 +43,8 @@ function M.toggle_oil()
 	local U = require("utils.nvim")
 
 	if U.current_buffer_filetype() == "oil" then
-		pcall(vim.api.nvim_command, "b#")
+		local win_id = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_close(win_id, true)
 	else
 		local ok, actions = pcall(require, "telescope.actions")
 		if ok then
