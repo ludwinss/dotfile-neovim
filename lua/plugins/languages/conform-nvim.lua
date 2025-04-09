@@ -1,10 +1,51 @@
 require("conform").setup({
+	notify_on_error = false,
+
+	format_on_save = function()
+		if vim.g.disable_autoformat then
+			return
+		end
+		return { timeout_ms = 800, lsp_fallback = true, quiet = true }
+	end,
+
+	default_format_opts = { lsp_format = "fallback" },
+
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "isort", "black" },
-		rust = { "rustfmt", lsp_format = "fallback" },
-		javascript = { "prettierd", "prettier", stop_after_first = true },
-		typescript = { "prettierd", "prettier", stop_after_first = true },
-		csharpier = { "csharpier" },
+		rust = { "rustfmt", "lsp" },
+
+		javascript = { "prettierd", "eslint" },
+		typescript = { "prettierd", "eslint" },
+		javascriptreact = { "prettierd", "eslint" },
+		typescriptreact = { "prettierd", "eslint" },
+
+		json = { "prettierd" },
+		markdown = { "prettierd" },
+		csharp = { "csharpier", "lsp" },
+	},
+
+	formatters = {
+		eslint_d = {
+			condition = function(ctx)
+				return vim.fs.find({
+					".eslintrc",
+					".eslintrc.js",
+					".eslintrc.cjs",
+					"package.json",
+				}, { upward = true, path = ctx.filename })[1] ~= nil
+			end,
+			prepend_args = { "--fix", "--rule", "prettier/prettier: off" },
+		},
+
+		prettierd = {
+			condition = function(ctx)
+				return vim.fs.find({
+					".prettierrc",
+					".prettierrc.js",
+					"prettier.config.js",
+					"package.json",
+				}, { upward = true, path = ctx.filename })[1] ~= nil
+			end,
+		},
 	},
 })

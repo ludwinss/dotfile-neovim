@@ -104,8 +104,11 @@ function M.format_buffer()
 end
 
 M.format_enabled = false
+vim.g.disable_autoformat = not M.format_enabled
+
 function M.toggle_format_enabled()
 	M.format_enabled = not M.format_enabled
+	vim.g.disable_autoformat = not M.format_enabled
 	require("utils").refresh_statusline()
 end
 

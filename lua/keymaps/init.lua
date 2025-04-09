@@ -53,11 +53,11 @@ function M.native()
 	)
 	keymap(n, "<leader>d", function()
 		require("native.lsp-native").toggle_virtual_diagnostics()
-		default_opts = { noremap = true, silent = true, desc = "Desactivar diagnósticos virtuales" }
+		default_opts = vim.tbl_extend("force", default_opts, { desc = "Act/Desc diagnósticos virtuales" })
 	end, default_opts)
 	keymap(n, "<leader>f", function()
 		require("native.lsp-native").toggle_format_enabled()
-		default_opts = { noremap = true, silent = true, desc = "Desactivar formateo" }
+		default_opts = vim.tbl_extend("force", default_opts, { desc = "Act/Desc formateo" })
 	end, default_opts)
 	keymap(
 		n,

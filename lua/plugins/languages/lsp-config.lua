@@ -38,7 +38,7 @@ LC.eslint.setup({
 		format = false,
 	},
 	on_attach = function(client, bufnr)
-		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentFormattingProvider = false
 		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
 	end,
 })
