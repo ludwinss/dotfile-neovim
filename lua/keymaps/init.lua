@@ -20,6 +20,7 @@ function M.init()
 	M.editing()
 	M.zenmode()
 	M.completion()
+	M.terminal()
 end
 
 -- dont touch
@@ -600,6 +601,10 @@ function M.noice()
 			desc = "Desplazar contenido (up)",
 		})
 	)
+end
+
+function M.terminal()
+	keymap(n, "<leader>t", "<cmd>ToggleTerm<CR>", vim.tbl_extend("force", default_opts, { desc = "Abrir terminal" }))
 end
 
 return M

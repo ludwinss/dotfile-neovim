@@ -279,4 +279,11 @@ return {
 			require("plugins.languages.leetcode-config")
 		end,
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		lazy = false,
+		config = function()
+			require("plugins.ui.toggleterm-nvim")
+		end,
+	},
 }

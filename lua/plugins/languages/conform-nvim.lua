@@ -14,10 +14,12 @@ require("conform").setup({
 		lua = { "stylua" },
 		rust = { "rustfmt", "lsp" },
 
-		javascript = { "prettierd", "eslint" },
-		typescript = { "prettierd", "eslint" },
-		javascriptreact = { "prettierd", "eslint" },
-		typescriptreact = { "prettierd", "eslint" },
+		javascript = { "prettierd", "eslint_d" },
+		typescript = { "prettierd", "eslint_d" },
+		javascriptreact = { "prettierd", "eslint_d" },
+		typescriptreact = { "prettierd", "eslint_d" },
+
+		python = { "ruff_fix", "black" },
 
 		json = { "prettierd" },
 		markdown = { "prettierd" },

@@ -54,4 +54,21 @@ function M.toggle_oil()
 	end
 end
 
+function M.close_all_oil_windows()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		if vim.api.nvim_buf_get_option(buf, "filetype") == "oil" then
+			vim.api.nvim_win_close(win, true)
+		end
+	end
+end
+
+function M.toggle_term(term)
+	local opts = { buffer = term.bufnr, noremap = true, silent = true, nowait = true }
+
+	vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>:bd!<CR>]], opts)
+	vim.keymap.set("n", "<Esc><Esc>", "<cmd>bd!<CR>", opts)
+end
+
 return M

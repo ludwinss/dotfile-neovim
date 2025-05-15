@@ -20,6 +20,8 @@ mason_lspconfig.setup({
 		"html",
 		"jsonls",
 		"omnisharp",
+		"eslint",
+		"ruff",
 	},
 	automatic_installation = true,
 })
