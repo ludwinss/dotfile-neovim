@@ -21,6 +21,7 @@ function M.init()
 	M.zenmode()
 	M.completion()
 	M.terminal()
+	M.yank()
 end
 
 -- dont touch
@@ -68,7 +69,11 @@ function M.native()
 			desc = "Ver página de manual",
 		})
 	)
-	vim.keymap.set("n", "K", "<nop>", { desc = "Desactivar K por defecto" })
+	keymap("n", "K", "<nop>", { desc = "Desactivar K por defecto" })
+
+	keymap(n_v, "d", '"_d', vim.tbl_extend("force", default_opts, { desc = "Eliminar sin copiar" }))
+	keymap(n_v, "x", '"_x', vim.tbl_extend("force", default_opts, { desc = "Eliminar sin copiar" }))
+	keymap(n_v, "c", '"_c', vim.tbl_extend("force", default_opts, { desc = "Eliminar sin copiar" }))
 end
 
 --TODO: dont touch
@@ -605,6 +610,15 @@ end
 
 function M.terminal()
 	keymap(n, "<leader>t", "<cmd>ToggleTerm<CR>", vim.tbl_extend("force", default_opts, { desc = "Abrir terminal" }))
+end
+
+function M.yank()
+	keymap(
+		n,
+		"<leader>sy",
+		"<cmd>Telescope yank_history<cr>",
+		vim.tbl_extend("force", default_opts, { desc = "Ver historial de copiado" })
+	)
 end
 
 return M

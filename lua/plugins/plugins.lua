@@ -104,6 +104,13 @@ return {
 		end,
 	},
 	{
+		"gbprod/yanky.nvim",
+    event = { "VeryLazy" },
+		config = function()
+			require("plugins.ui.yank-nvim")
+		end,
+	},
+	{
 		"folke/zen-mode.nvim",
 		config = function()
 			require("plugins.ui.zenmode")
