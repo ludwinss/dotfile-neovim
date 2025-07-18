@@ -40,6 +40,12 @@ local window = {
 	}),
 }
 
+local sources = CMP.config.sources({
+	{ name = "nvim_lsp" },
+	{ name = "luasnip" },
+	{ name = "codeium" },
+})
+
 window.documentation.max_height = 18
 window.documentation.max_width = 80
 window.documentation.side_padding = 1
@@ -47,6 +53,7 @@ window.documentation.side_padding = 1
 CMP.setup({
 	formatting = formatting,
 	window = window,
+	sources = sources,
 	performance = {
 		debounce = 50,
 	},

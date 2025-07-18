@@ -223,9 +223,13 @@ return {
 	},
 	-- OTHER.
 	{
-		"github/copilot.vim",
+		"Exafunction/windsurf.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
 		config = function()
-			require("plugins.languages.copilot")
+			require("plugins.languages.windsfurd-nvim")
 		end,
 	},
 	{
