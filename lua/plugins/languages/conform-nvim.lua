@@ -1,9 +1,14 @@
 require("conform").setup({
 	notify_on_error = false,
 
-	format_on_save = function()
+	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat then
 			return
+		end
+
+		local ft = vim.bo[bufnr].filetype
+		if ft == "csharp" or ft == "cs" then
+			return { timeout_ms = 800, lsp_fallback = false, quiet = true }
 		end
 		return { timeout_ms = 800, lsp_fallback = true, quiet = true }
 	end,
@@ -23,10 +28,21 @@ require("conform").setup({
 
 		json = { "prettierd" },
 		markdown = { "prettierd" },
-		csharp = { "csharpier", "lsp" },
+
+		csharp = { "csharpier" },
+		cs = { "csharpier" },
 	},
 
 	formatters = {
+		csharpier = {
+			command = "csharpier",
+			args = { "format", "--write-stdout" },
+			stdin = true,
+			condition = function()
+				return vim.fn.executable(vim.fn.exepath("csharpier")) == 1
+			end,
+		},
+
 		eslint_d = {
 			condition = function(ctx)
 				return vim.fs.find({
