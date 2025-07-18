@@ -20,24 +20,7 @@ mason_lspconfig.setup({
 		"html",
 		"jsonls",
 		"omnisharp",
-		"eslint",
 		"ruff",
 	},
-	automatic_installation = true,
-})
-
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local lsp_flags = {
-	debounce_text_changes = 250,
-}
-
-mason_lspconfig.setup_handlers({
-	function(server_name)
-		lspconfig[server_name].setup({
-			capabilities = capabilities,
-			lsp_flags = lsp_flags,
-		})
-	end,
+	automatic_enable = true,
 })

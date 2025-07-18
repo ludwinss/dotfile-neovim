@@ -1,6 +1,6 @@
 require("mason-tool-installer").setup({
 	ensure_installed = {
-		"csharpier",
+		-- "csharpier", Ahora usamos el dotnet tools install csharpier
 		"stylua",
 		"prettierd",
 	},
