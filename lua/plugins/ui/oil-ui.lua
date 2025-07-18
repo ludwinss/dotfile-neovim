@@ -17,6 +17,9 @@ oil.setup({
 	keymaps = {
 		["<CR>"] = "actions.select",
 		["-"] = "actions.parent",
+		["<C-v>"] = "actions.select_vsplit",
+		["<C-x>"] = "actions.select_split",
+		["<C-t>"] = "actions.select_tab",
 	},
 	use_default_keymaps = false,
 	view_options = {
