@@ -1,5 +1,0 @@
-require("native.options")
-require("native.default-theme")
-require("native.lsp-native")
-require("native.winbar")
-require("native.statuscolumn")
