@@ -61,7 +61,16 @@ return {
 					section_separators = "",
 					component_separators = "",
 				},
-			})
+		})
+	end,
+	},
+	{
+		"stevearc/oil.nvim",
+		event = "VeryLazy",
+		cmd = { "Oil" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("config.oil").setup()
 		end,
 	},
 	{

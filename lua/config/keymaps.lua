@@ -27,14 +27,22 @@ function M.setup()
 	map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Renombrar símbolo" })
 	map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Acciones de código" })
 	map("n", "K", vim.lsp.buf.hover, { desc = "Documentación LSP" })
-	map({ "n", "v" }, "<leader>cf", function()
+	map({ "n", "v" }, "<leader>gf", function()
 		require("conform").format({
 			async = true,
 			lsp_fallback = true,
 		})
 	end, { desc = "Formatear archivo" })
 
-	map("n", "<leader>pv", "<Cmd>Ex<CR>", { desc = "Explorador netrw" })
+	local function toggle_oil()
+		if vim.bo.filetype == "oil" then
+			vim.cmd.close()
+			return
+		end
+		vim.cmd("Oil --float")
+	end
+
+	map("n", "<leader>e", toggle_oil, { desc = "Abrir explorador (Oil)" })
 end
 
 return M
